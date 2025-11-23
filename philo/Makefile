@@ -8,6 +8,8 @@ OBJ_DIR  =  obj/
 
 SRCS     =  src/main.c \
 			src/ft_atoi.c \
+			src/init.c \
+			src/thread_init.c \
 			
 
 OBJ      =  $(patsubst src/%.c, $(OBJ_DIR)%.o, $(SRCS))
