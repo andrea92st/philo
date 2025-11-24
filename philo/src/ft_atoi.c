@@ -6,7 +6,7 @@
 /*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 14:28:02 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/11/21 14:38:03 by anfiorit         ###   ########.fr       */
+/*   Updated: 2025/11/24 19:34:19 by anfiorit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,3 +57,14 @@ int	ft_atoi(const char *str)
 	}
 	return (res * pos);
 }
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
+}
+

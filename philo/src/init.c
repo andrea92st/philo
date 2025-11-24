@@ -6,7 +6,7 @@
 /*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 13:12:48 by fio               #+#    #+#             */
-/*   Updated: 2025/11/24 18:14:41 by anfiorit         ###   ########.fr       */
+/*   Updated: 2025/11/24 18:52:45 by anfiorit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void init_data(t_data *data, int *tab, int ac)
 		data->must_eat = tab[4];
 	else
 		data->must_eat = -1;
+	data->stop = 0;
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->nb_philos);
 	if (!data->forks)
 		return;
@@ -49,7 +50,7 @@ void	init_philo(t_data *data)
 	while(i < data->nb_philos)
 	{
 		data->philos[i].id = i + 1;
-		data->philos[i].last_meal = 0;
+		data->philos[i].last_meal = data->start_time;
 		data->philos[i].meals_eaten = 0;
 		data->philos[i].data = data;
 		data->philos[i].left_fork = i;
