@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 14:18:18 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/11/22 14:02:28 by fio              ###   ########.fr       */
+/*   Updated: 2025/11/24 18:18:38 by anfiorit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 int	main(int ac, char **av)
 {
 	int		*tab;
+	int		i;
+	
 	if(ac != 5 && ac != 6)
 	{
 		printf("Nombre d'arguments invalide\n");
@@ -28,7 +30,15 @@ int	main(int ac, char **av)
 	}
 	t_data data;
 	init_data(&data, tab, ac);
-		return (0);
+	free(tab);
+	init_thread(&data);
+	i = 0;
+	while (i < data.nb_philos)
+	{
+		pthread_join(data.philos[i].thread, NULL);
+		i++;
+	}
+	return (0);
 }
 
 int	*convert_into_int(int ac, char **av)

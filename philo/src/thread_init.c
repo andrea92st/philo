@@ -6,7 +6,7 @@
 /*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:53:18 by fio               #+#    #+#             */
-/*   Updated: 2025/11/24 14:26:17 by anfiorit         ###   ########.fr       */
+/*   Updated: 2025/11/24 18:17:24 by anfiorit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,6 @@ void	*routine(void *arg)
 		philo_sleep(philo);
 		philo_thinking(philo);		
 	}
+	return (NULL) ;
 }
+

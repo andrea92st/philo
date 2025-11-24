@@ -54,6 +54,10 @@ void	*routine(void *arg);
 void	philo_eat(t_philo *philo);
 void	philo_sleep(t_philo *philo);
 void	philo_thinking(t_philo *philo);
-void print_status(t_philo *philo, char *str);
+void	print_status(t_philo *philo, char *str);
+int		is_dead(t_data *data);
+
+		//ACTIONS UTILS //
+long	get_time(void);
 
 #endif

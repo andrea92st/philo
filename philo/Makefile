@@ -10,8 +10,9 @@ SRCS     =  src/main.c \
 			src/ft_atoi.c \
 			src/init.c \
 			src/thread_init.c \
+			src/actions.c \
+			src/actions_utils.c \
 			
-
 OBJ      =  $(patsubst src/%.c, $(OBJ_DIR)%.o, $(SRCS))
 
 MAKE_DIR =  mkdir -p
@@ -19,7 +20,7 @@ MAKE_DIR =  mkdir -p
 all:            $(NAME)
 
 $(NAME):        $(OBJ)
-				@$(CC) $(CFLAGS) $(OBJ) -o $@ -lreadline
+				@$(CC) $(CFLAGS) $(OBJ) -o $@ -pthread
 				@echo "\033[1;92m======== project compiled ========\033[0m"
 
 $(OBJ_DIR)%.o:  src/%.c
