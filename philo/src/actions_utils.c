@@ -1,39 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread_init.c                                      :+:      :+:    :+:   */
+/*   actions_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/23 12:53:18 by fio               #+#    #+#             */
-/*   Updated: 2025/11/24 14:26:17 by anfiorit         ###   ########.fr       */
+/*   Created: 2025/11/24 15:41:24 by anfiorit          #+#    #+#             */
+/*   Updated: 2025/11/24 15:41:51 by anfiorit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philosophers.h"
 
-void	init_thread(t_data *data)
+long	get_time(void)
 {
-	int	i;
+	struct timeval tv;
 
-	i = 0;
-	while(i < data->nb_philos)
-	{
-		pthread_create(&data->philos[i].thread, NULL, routine,
-                   &data->philos[i]);
-		i++;
-	}
-}
-
-void	*routine(void *arg)
-{
-	t_philo *philo;
-	
-	philo = (t_philo *) arg;
-	while(!is_dead(philo->data))
-	{
-		philo_eat(philo);
-		philo_sleep(philo);
-		philo_thinking(philo);		
-	}
+	gettimeofday(&tv, NULL);
+	return((tv.tv_sec * 1000) + (tv.tv_sec / 1000));
 }

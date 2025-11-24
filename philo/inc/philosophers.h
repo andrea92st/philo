@@ -19,16 +19,21 @@ typedef struct s_data
     long    time_to_die;
     long    time_to_sleep;
     int     must_eat;
+	long	start_time;
+	pthread_mutex_t	print_mutex;
+	pthread_mutex_t	*forks; 
     t_philo   *philos;
 }  t_data;
 
 typedef struct s_philo
 {
     int    id;
+	long	last_meal;
+	int		meals_eaten;
     t_data  *data;
 	pthread_t thread;
-	pthread_mutex_t right_fork;
-	pthread_mutex_t left_fork;
+	int right_fork;
+	int left_fork;
 }   t_philo;
 
 
@@ -46,5 +51,9 @@ void	init_thread(t_data *data);
 
 		// ACTIONS //
 void	*routine(void *arg);
+void	philo_eat(t_philo *philo);
+void	philo_sleep(t_philo *philo);
+void	philo_thinking(t_philo *philo);
+void print_status(t_philo *philo, char *str);
 
 #endif

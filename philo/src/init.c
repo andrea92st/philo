@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 13:12:48 by fio               #+#    #+#             */
-/*   Updated: 2025/11/22 14:01:20 by fio              ###   ########.fr       */
+/*   Updated: 2025/11/24 15:09:19 by anfiorit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,11 @@ void	init_philo(t_data *data)
 	while(i < data->nb_philos)
 	{
 		data->philos[i].id = i + 1;
+		data->philos[i].last_meal = 0;
+		data->philos[i].meals_eaten = 0;
 		data->philos[i].data = data;
+		data->philos[i].left_fork = i;
+		data->philos[i].right_fork = (i + 1) % data->nb_philos;
 		i++;
 	}	
 }
