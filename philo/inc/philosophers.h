@@ -21,6 +21,7 @@ typedef struct s_data
     int     must_eat;
 	long	start_time;
 	int		stop;
+	pthread_t		monitor_thread;
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	stop_mutex;
 	pthread_mutex_t	*forks; 
@@ -53,13 +54,12 @@ void	init_thread(t_data *data);
 
 		// ACTIONS //
 void	*routine(void *arg);
+void	*monitor(void *arg);
 void	philo_eat(t_philo *philo);
 void	philo_sleep(t_philo *philo);
 void	philo_thinking(t_philo *philo);
 void	print_status(t_philo *philo, char *str);
-int		is_dead(t_data *data);
 int		ft_strcmp(char *s1, char *s2);
-
 
 		//ACTIONS UTILS //
 long	get_time(void);

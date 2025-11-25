@@ -6,7 +6,7 @@
 /*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:53:18 by fio               #+#    #+#             */
-/*   Updated: 2025/11/24 18:43:44 by anfiorit         ###   ########.fr       */
+/*   Updated: 2025/11/25 15:38:43 by anfiorit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	init_thread(t_data *data)
                    &data->philos[i]);
 		i++;
 	}
+	pthread_create(&data->monitor_thread, NULL, monitor, data);
 }
 
 void	*routine(void *arg)
@@ -32,8 +33,15 @@ void	*routine(void *arg)
 	philo = (t_philo *) arg;
 	if (philo->id % 2 == 0)
 		usleep(1000);
-	while(!is_dead(philo->data))
+	while (1)
 	{
+		pthread_mutex_lock(&philo->data->stop_mutex);
+		if (philo->data->stop)
+		{
+			pthread_mutex_unlock(&philo->data->stop_mutex);
+			break;
+		}
+		pthread_mutex_unlock(&philo->data->stop_mutex);
 		philo_eat(philo);
 		philo_sleep(philo);
 		philo_thinking(philo);		

@@ -6,7 +6,7 @@
 /*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:33:00 by fio               #+#    #+#             */
-/*   Updated: 2025/11/24 19:37:27 by anfiorit         ###   ########.fr       */
+/*   Updated: 2025/11/25 15:36:17 by anfiorit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,31 +54,35 @@ void print_status(t_philo *philo, char *str)
 	
 }
 
-int	is_dead(t_data *data)
+void	*monitor(void *arg)
 {
+	t_data	*data;
 	int		i;
 	long	current_time;
 	
-	pthread_mutex_lock(&data->stop_mutex);
-	if(data->stop)
+	data = (t_data *)arg;
+	while (1)
 	{
-		pthread_mutex_unlock(&data->stop_mutex);
-		return (1);
-	}
-	pthread_mutex_unlock(&data->stop_mutex);
-	i = 0;
-	while(i < data->nb_philos)
-	{
-		current_time = get_time();
-		if(current_time - data->philos[i].last_meal > data->time_to_die)
+		i = 0;
+		while(i < data->nb_philos)
 		{
-			data->stop = 1;
+			current_time = get_time();
+			pthread_mutex_lock(&data->stop_mutex);
+			if (current_time - data->philos[i].last_meal > data->time_to_die)
+			{
+				data->stop = 1;
+				pthread_mutex_unlock(&data->stop_mutex);
+				pthread_mutex_lock(&data->print_mutex);
+				printf("%ld %d died\n", current_time - data->start_time,
+					data->philos[i].id);
+				pthread_mutex_unlock(&data->print_mutex);
+				return (NULL);
+			}
 			pthread_mutex_unlock(&data->stop_mutex);
-			print_status(&data->philos[i], "died");
-			return(1);
+			i++;
 		}
-		i++;
+		usleep(1000);
 	}
-	return(0);
+	return (NULL);
 }
 

@@ -6,7 +6,7 @@
 /*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 14:18:18 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/11/24 18:18:38 by anfiorit         ###   ########.fr       */
+/*   Updated: 2025/11/25 15:39:29 by anfiorit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	main(int ac, char **av)
 		pthread_join(data.philos[i].thread, NULL);
 		i++;
 	}
+	pthread_join(data.monitor_thread, NULL);
 	return (0);
 }
 
