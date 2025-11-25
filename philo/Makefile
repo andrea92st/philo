@@ -12,7 +12,8 @@ SRCS     =  src/main.c \
 			src/thread_init.c \
 			src/actions.c \
 			src/actions_utils.c \
-			
+			src/clean.c \
+
 OBJ      =  $(patsubst src/%.c, $(OBJ_DIR)%.o, $(SRCS))
 
 MAKE_DIR =  mkdir -p
