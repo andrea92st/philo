@@ -60,6 +60,7 @@ void	philo_sleep(t_philo *philo);
 void	philo_thinking(t_philo *philo);
 void	print_status(t_philo *philo, char *str);
 int		ft_strcmp(char *s1, char *s2);
+int		check_death (t_data *data);
 
 		//ACTIONS UTILS //
 long	get_time(void);
